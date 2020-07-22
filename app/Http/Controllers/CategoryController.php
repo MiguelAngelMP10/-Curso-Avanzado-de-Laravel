@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Categories;
+use App\Category;
 use Illuminate\Http\Request;
 
-class CategoriesController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        //
+        return Category::all();
     }
 
     /**
@@ -25,40 +25,43 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Category::create($request->all());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Categories  $categories
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Categories $categories)
+    public function show(Category $category)
     {
-        //
+        return $category;
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Categories  $categories
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categories $categories)
+    public function update(Request $request, Category $category)
     {
-        //
+        $category->update($request->all());
+
+        return $category;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Categories  $categories
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categories $categories)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return response()->json();
     }
 }
