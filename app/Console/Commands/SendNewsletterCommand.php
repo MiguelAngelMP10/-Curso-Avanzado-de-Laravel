@@ -33,11 +33,6 @@ class SendNewsletterCommand extends Command
         $emails = $this->argument('emails');
         $builder =  User::query();
 
-        //solucion de reto
-        // $builder
-        //     ->whereNull('email_verified_at')
-        //     ->whereRaw('email_verified_at BETWEEN DATE_ADD(CURDATE(), INTERVAL -7 DAY) AND CURDATE()');
-
         if ($emails) {
             $builder->whereIn("email", $emails);
         }
