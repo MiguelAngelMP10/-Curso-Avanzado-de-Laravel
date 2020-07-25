@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Console\Commands\SendEmailVerificationReminderCommand;
+use App\Console\Commands\SendNewsletterCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -13,7 +15,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        SendNewsletterCommand::class,
+        SendEmailVerificationReminderCommand::class,
     ];
 
     /**
@@ -24,7 +27,23 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('inspire')
+            ->evenInMaintenanceMode()
+            ->sendOutputTo(storage_path('inspire.log'))
+            ->everyMinute();
+
+        $schedule->call(function () {
+            echo 'Hola';
+        })->everyFiveMinutes();
+
+        $schedule->command(SendNewsletterCommand::class)
+            ->withoutOverlapping()
+            ->onOneServer()
+            ->mondays();
+
+        $schedule->command(SendEmailVerificationReminderCommand::class)
+            ->onOneServer()
+            ->daily();
     }
 
     /**
@@ -34,7 +53,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
