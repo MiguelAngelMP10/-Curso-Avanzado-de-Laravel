@@ -2,12 +2,12 @@
 
 namespace App;
 
-use App\Utils\CanBeRated;
+use App\Utils\CanBeRate;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    use CanBeRated;
+    use CanBeRate;
     protected $guarded = [];
 
     public function category()
@@ -17,6 +17,14 @@ class Product extends Model
 
     public function createdBy()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'created_by');
+    }
+    protected static function booted()
+    {
+        static::creating(function (Product $product) {
+            $faker = \Faker\Factory::create();
+            $product->image_url = $faker->imageUrl();
+            $product->createdBy()->associate(auth()->user());
+        });
     }
 }

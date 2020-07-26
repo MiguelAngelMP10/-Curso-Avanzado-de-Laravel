@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Utils\CanRate;
+use App\Utils\CanBeRate;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -10,7 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable, HasApiTokens, CanRate;
+    use Notifiable, HasApiTokens, CanRate, CanBeRate;
 
     /**
      * The attributes that are mass assignable.

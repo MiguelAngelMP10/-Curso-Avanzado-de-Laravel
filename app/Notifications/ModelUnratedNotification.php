@@ -10,8 +10,8 @@ class ModelUnratedNotification extends Notification
 {
     use Queueable;
 
-    private $rateableName;
-    private $qualifierName;
+    private  $rateableName;
+    private  $qualifierName;
 
     public function __construct(
         string $qualifierName,
