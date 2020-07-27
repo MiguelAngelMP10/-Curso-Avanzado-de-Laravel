@@ -15,6 +15,21 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+
+                        <table class="table table-light border">
+                            <tbody>
+                                @foreach ($rating as $fila )
+                                <tr>
+                                    <td>{{ $fila->id }}</td>
+                                    <td>{{ $fila->score }}</td>
+                                    <td>{{ $fila->rateable_type }}</td>
+                                    <td>{{ $fila->rateable_id }}</td>
+                                    <td>{{ $fila->qualifier_type }}</td>
+                                    <td>{{ $fila->qualifier_id }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                 </div>
             </div>
         </div>
