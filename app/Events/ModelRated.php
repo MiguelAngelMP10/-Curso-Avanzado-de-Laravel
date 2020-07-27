@@ -11,9 +11,9 @@ class ModelRated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    private Model $qualifier;
-    private Model $rateable;
-    private float $score;
+    private  $qualifier;
+    private  $rateable;
+    private  $score;
 
     public function __construct(Model $qualifier, Model $rateable, float $score)
     {

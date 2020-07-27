@@ -7,6 +7,7 @@ use App\Http\Resources\RatingResource;
 use App\Product;
 use App\User;
 use Gate;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\Request;
 
 class ProductRatingController extends Controller

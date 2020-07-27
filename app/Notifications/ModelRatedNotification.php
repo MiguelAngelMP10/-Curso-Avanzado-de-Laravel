@@ -6,19 +6,22 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ModelUnratedNotification extends Notification
+class ModelRatedNotification extends Notification
 {
     use Queueable;
 
-    private $rateableName;
-    private $qualifierName;
+    private  $rateableName;
+    private  $score;
+    private  $qualifierName;
 
     public function __construct(
         string $qualifierName,
-        string $rateableName
+        string $rateableName,
+        float $score
     ) {
         $this->qualifierName = $qualifierName;
         $this->rateableName = $rateableName;
+        $this->score = $score;
     }
 
     /**
@@ -35,7 +38,8 @@ class ModelUnratedNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->line("¡{$this->qualifierName} ha descalificado tu producto
-                    {$this->rateableName}!");
+            ->line("¡{$this->qualifierName} ha calificado tu producto
+                    {$this->rateableName}! con {$this->score}
+                    estrellas");
     }
 }
