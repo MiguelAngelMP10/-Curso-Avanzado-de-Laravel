@@ -34,6 +34,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('products/{product}/rate', [ProductRatingController::class, 'rate']);
 
     Route::post('products/{product}/unrate', [ProductRatingController::class, 'unrate']);
+
+    Route::post('rating/{rating}/approve', [ProductRatingController::class, 'approve']);
+
+    Route::get('rating', [ProductRatingController::class, 'list']);
 });
 
 
